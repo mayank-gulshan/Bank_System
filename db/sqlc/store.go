@@ -93,7 +93,13 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 
 	return result, err
 }
+func (store *Store) GetTransfer(ctx context.Context, id int64) (Transfers, error) {
+	return store.Queries.GetTransfer(ctx, id)
+}
 
+func (store *Store) GetEntry(ctx context.Context, id int64) (Entries, error) {
+	return store.Queries.GetEntry(ctx, id)
+}
 func addMoney(
 	ctx context.Context,
 	q *Queries,

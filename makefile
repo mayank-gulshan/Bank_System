@@ -1,3 +1,4 @@
+
 DB_URL=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
 
 postgres:
@@ -21,4 +22,7 @@ sqlc:
 test:
 	go test -v -cover ./...
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test
+server:
+	go run main.go
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server
