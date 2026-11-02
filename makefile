@@ -1,20 +1,26 @@
-
-DB_URL=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
+DB_URL=postgresql://postgres:Mayank12@localhost:5432/simple_bank?sslmode=disable
 
 postgres:
-	docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
+	docker run --name postgres04 -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Mayank12 -d postgres:12-alpine
 
 createdb:
-	docker exec -it postgres12 createdb --username=root --owner=root simple_bank
+	docker exec -it postgres04 createdb --username=postgres --owner=postgres simple_bank
 
 dropdb:
-	docker exec -it postgres12 dropdb simple_bank
+		docker exec -it postgres04 dropdb simple_bank
+
 
 migrateup:
 	migrate -path db/migration -database "$(DB_URL)" -verbose up
 
+migrateup1:
+	migrate -path db/migration -database "$(DB_URL)" -verbose up 1
+
 migratedown:
 	migrate -path db/migration -database "$(DB_URL)" -verbose down
+
+migratedown1:
+	migrate -path db/migration -database "$(DB_URL)" -verbose down 1
 
 sqlc:
 	sqlc generate
